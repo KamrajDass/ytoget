@@ -8,10 +8,24 @@ var videoRouter = require('./routes/video');
 
 var app = express();
 
+// Allow requests from local dev server and the deployed Firebase Hosting site.
+// Update FIREBASE_HOSTING_URL env var on Render with your actual Firebase domain
+// e.g. https://your-project-id.web.app
+const allowedOrigins = [
+  'http://localhost:1100',
+  process.env.FIREBASE_HOSTING_URL,
+].filter(Boolean);
 
-
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. curl, mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('CORS: origin not allowed'));
+  },
+  credentials: true,
+}));
 app.use(logger('dev'));
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

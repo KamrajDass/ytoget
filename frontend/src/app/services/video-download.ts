@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface VideoInfoResponse {
   title: string;
@@ -37,7 +38,7 @@ export interface CreateDownloadJobPayload {
   providedIn: 'root'
 })
 export class VideoDownloadService {
-  private readonly baseUrl = '/api/video';
+  private readonly baseUrl = `${environment.apiBase}/api/video`;
 
   constructor(private http: HttpClient) {}
 

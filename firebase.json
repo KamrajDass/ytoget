@@ -1,17 +1,4 @@
 {
-  "functions": [
-    {
-      "source": "backend",
-      "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ]
-    }
-  ],
   "hosting": {
     "public": "frontend/dist/frontend/browser",
     "ignore": [
@@ -20,13 +7,6 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      {
-        "source": "/api/**",
-        "function": {
-          "functionId": "api",
-          "region": "us-central1"
-        }
-      },
       {
         "source": "**",
         "destination": "/index.html"

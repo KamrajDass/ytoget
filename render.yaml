@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: node-video-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node ./bin/www
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FIREBASE_HOSTING_URL
+        # Set this after Firebase deploy, e.g. https://your-project-id.web.app
+        value: https://YOUR-PROJECT-ID.web.app
+    autoDeploy: true

@@ -1,10 +1,10 @@
 <section class="video-download-page">
   <div class="download-card">
-    <!-- <h2 class="title">YouTube Video Downloader</h2>
-    <p class="subtitle">Paste a YouTube URL, submit, and your video download will start.</p> -->
-
+    <header class="card-header">
+      <p class="eyebrow"> Smart YouTube Downloader</p>
+    </header>
     <form (ngSubmit)="submit()" #downloadForm="ngForm" class="download-form">
-      <label for="videoUrl">YouTube URL</label>
+      <label for="videoUrl">Paste YouTube URL</label>
       <input
         id="videoUrl"
         name="videoUrl"
@@ -15,8 +15,13 @@
         placeholder="https://www.youtube.com/watch?v=..."
       />
 
-      <button type="button" [disabled]="isFetchingInfo || !downloadForm.form.valid" (click)="fetchVideoInfo()">
-        {{ isFetchingInfo ? 'Fetching info...' : 'Fetch Video Info' }}
+      <button
+        type="button"
+        class="action-btn fetch-btn"
+        [disabled]="isFetchingInfo || !downloadForm.form.valid"
+        (click)="fetchVideoInfo()"
+      >
+        {{ isFetchingInfo ? 'Loading Video info...' : 'Loading Video' }}
       </button>
 
       @if (infoLoaded) {
@@ -30,16 +35,7 @@
           </div>
         </div>
       }
-
-      <label for="fileName">File name (optional)</label>
-      <input
-        id="fileName"
-        name="fileName"
-        type="text"
-        [(ngModel)]="fileName"
-        placeholder="youtube-video"
-      />
-
+      
       <div class="format-section">
         <span class="format-label">Format</span>
         <div class="format-group">
@@ -82,7 +78,11 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="isDownloading || !downloadForm.form.valid || !infoLoaded">
+      <button
+        type="submit"
+        class="action-btn submit-btn"
+        [disabled]="isDownloading || !downloadForm.form.valid || !infoLoaded"
+      >
         {{ isDownloading ? 'Downloading...' : 'Download' }}
       </button>
     </form>
@@ -112,11 +112,11 @@
     }
 
     @if (successMessage) {
-      <p class="success">{{ successMessage }}</p>
+      <p class="success notice">{{ successMessage }}</p>
     }
 
     @if (errorMessage) {
-      <p class="error">{{ errorMessage }}</p>
+      <p class="error notice">{{ errorMessage }}</p>
     }
   </div>
 </section>
