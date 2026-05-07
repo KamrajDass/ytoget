@@ -1,0 +1,225 @@
+/* Container adjustments */
+.container {
+    max-width: 1000px;
+}
+
+/* Navbar conflict fix */
+.order-wrapper {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 60px !important;
+    /* Navbar se kam rakhein, usually navbars 1030+ hote hain */
+}
+
+/* Stepper System */
+.stepper-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stepper-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: #e9ecef;
+    z-index: -1;
+    /* Isko background mein bhejna zaroori hai */
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    /* Background line se upar */
+    text-align: center;
+    flex: 1;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 3px solid #dee2e6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    color: #adb5bd;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.step-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #adb5bd;
+    text-transform: uppercase;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Active State */
+.step.active .icon-box {
+    background: #4361EE;
+    border-color: #4361EE;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+.step.active .step-label {
+    color: #4361EE;
+}
+
+/* Sticky Sidebar Fix */
+.sticky-lg-top {
+    top: 90px !important;
+    /* Agar navbar fixed hai toh uski height ke mutabiq gap dein */
+    z-index: 10;
+}
+
+/* Background Line Fix */
+.stepper-wrapper::before {
+    content: "";
+    position: absolute;
+    /* Line ko vertical center karne ke liye icon ki half height (20px) par rakha hai */
+    top: 20px;
+    left: 50px;
+    /* Pehle icon ke center se start ho */
+    right: 50px;
+    /* Aakhri icon ke center par khatam ho */
+    height: 2px;
+    background: #e9ecef;
+    /* Default Gray Line */
+    z-index: 0;
+    /* Icons ke peeche */
+}
+
+/* Cancel Button Styling */
+.btn-outline-danger {
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+/* Sticky Sidebar for Desktop */
+.sticky-card {
+    position: sticky;
+    top: 20px;
+}
+
+/* Shipped Design Styles */
+.shipped-compact-card {
+    border: 1px solid #f0f2f5 !important;
+    transition: all 0.3s ease;
+}
+
+.shipped-icon-box {
+    width: 42px;
+    height: 42px;
+    background: #eef2ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.item-chip {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 12px;
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+}
+.opacity-75 {
+    opacity: 0.7;
+    filter: grayscale(0.5);
+}
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .stepper-wrapper::before {
+        top: 16px;
+    }
+
+    .icon-box {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    /* Mobile par text hide ya chota karna */
+    .step-label {
+        font-size: 8px;
+        letter-spacing: -0.2px;
+    }
+
+    .stepper-wrapper::before {
+        top: 16px;
+        /* Chote icons ke liye position adjust */
+        left: 30px;
+        right: 30px;
+    }
+
+    /* Step Container */
+    .step {
+        position: relative;
+        z-index: 1;
+        /* Line se upar dikhne ke liye */
+        text-align: center;
+        flex: 1;
+    }
+
+    /* Icon Box White Background zaroori hai taake line piche chhup jaye */
+    .icon-box {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        /* Solid background taake line cross na kare */
+        border: 3px solid #dee2e6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .card.sticky-lg-top {
+        margin-top: 1.5rem;
+    }
+
+    .btn-outline-danger {
+        padding: 12px;
+        /* Mobile par click area bada karne ke liye */
+    }
+    .w-100-mobile {
+        width: 100%;
+    }
+    
+    .shipped-compact-card {
+        padding: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Bahut choti screen par labels hide karke icons center kar sakte hain */
+    /* .step-label { display: none; } */
+
+    .order-wrapper {
+        padding: 15px !important;
+    }
+}

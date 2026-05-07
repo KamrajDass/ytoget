@@ -1,0 +1,150 @@
+/* Base styling */
+:host {
+    display: block;
+    background-color: #f0f4f8;
+    /* Softer background */
+    font-family: 'Inter', sans-serif;
+    /* Recommended clean font */
+}
+
+/* Helper Utilities */
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.ls-1 {
+    letter-spacing: 1px;
+}
+
+/* Profile Card Customizations */
+.profile-main-card {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Header Visual Area */
+.profile-header-visual {
+    height: 140px;
+    z-index: 1;
+}
+
+.header-gradient-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #4361ee 0%, #a06ee1 50%, #4cc9f0 100%);
+    filter: blur(5px);
+    opacity: 0.9;
+}
+
+/* Glassmorphism Effect Card */
+.glass-info-card {
+    position: absolute;
+    bottom: -30px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 2;
+}
+
+/* Avatar Styling */
+.avatar-holder {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.avatar-initials {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+/* Role Badge */
+.role-badge {
+    font-size: 0.65rem;
+    padding: 5px 10px;
+}
+
+/* Advanced Button Styling */
+.btn-premium {
+    background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3) !important;
+}
+
+/* Expandable Section Animation */
+.expandable-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+.expandable-details.is-expanded {
+    max-height: 300px;
+    /* Adjust based on content height */
+    opacity: 1;
+}
+
+.bg-dark-input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Advanced Styling */
+.modal-header-gradient {
+    background: linear-gradient(135deg, #212529 0%, #495057 100%);
+}
+
+.form-floating>.form-control {
+    height: calc(3.5rem + 10px);
+    font-weight: 600;
+}
+
+.form-floating>label {
+    padding-left: 1.5rem;
+    color: #6c757d;
+}
+
+/* Mobile Responsiveness fixes */
+@media (max-width: 576px) {
+    .profile-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .glass-info-card {
+        flex-direction: column;
+        text-align: center;
+        bottom: -50px;
+    }
+
+    .avatar-holder {
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+    }
+
+    .card-body {
+        padding-top: 4rem !important;
+        /* Extra padding for the lower floating card */
+    }
+}

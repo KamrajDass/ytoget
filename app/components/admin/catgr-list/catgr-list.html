@@ -1,0 +1,72 @@
+<div class="container-fluid py-4">
+    <div class="card border rounded-3 shadow-none">
+
+        <div class="card-header bg-white border-bottom p-4">
+            <h6 class="fw-bold text-dark mb-3 text-center text-md-start">Add New Category</h6>
+            <form [formGroup]="addForm" (ngSubmit)="onAdd()" class="row g-2">
+                <div class="col-12 col-md-4">
+                    <input type="text" formControlName="name" class="form-control" placeholder="Category Name">
+                </div>
+                <div class="col-12 col-md-5">
+                    <input type="text" formControlName="description" class="form-control" placeholder="Description">
+                </div>
+                <div class="col-12 col-md-3">
+                    <button type="submit" class="btn btn-dark w-100 fw-bold" [disabled]="addForm.invalid">
+                        Add Category
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="responsive-table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">Name</th>
+                            <th>Description</th>
+                            <th>Slug</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (catgr of categories; track catgr._id) {
+                        <tr class="align-middle">
+                            <td data-label="Name" class="ps-md-4">
+                                <input type="text" [(ngModel)]="catgr.name"
+                                    class="form-control form-control-sm edit-input">
+                            </td>
+                            <td data-label="Description">
+                                <input type="text" [(ngModel)]="catgr.description"
+                                    class="form-control form-control-sm edit-input">
+                            </td>
+                            <td data-label="Slug">
+                                <span class="text-muted small px-md-2">{{ catgr.slug }}</span>
+                            </td>
+                            <td data-label="Status">
+                                <span class="badge-status" [class.active]="catgr.isActive">
+                                    {{ catgr.isActive ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+                            <td data-label="Actions" class="text-md-end pe-md-4">
+                                <div class="d-flex justify-content-md-end gap-2 action-btns">
+                                    <button type="button" (click)="onSave(catgr)"
+                                        class="btn btn-sm btn-success px-3 flex-grow-1 flex-md-grow-0">
+                                        Save
+                                    </button>
+                                    <button type="button" (click)="onDelete(catgr._id)"
+                                        class="btn btn-sm btn-outline-danger border-0">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

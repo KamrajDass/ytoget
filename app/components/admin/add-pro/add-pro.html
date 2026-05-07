@@ -1,0 +1,125 @@
+<div class="container py-4">
+    <div class="card border-0 shadow-sm custom-card mx-auto">
+        <div class="card-header bg-white py-3 border-bottom">
+            <h6 class="mb-0 fw-bold text-dark small"><i class="bi bi-bag-plus-fill me-2 text-primary"></i>ADD NEW
+                PRODUCT</h6>
+        </div>
+
+        <div class="card-body p-4">
+            <form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+
+                <div class="row g-2 mb-3">
+                    <div class="col-md-8">
+                        <label class="compact-label">Product Name</label>
+                        <input type="text" formControlName="name" class="form-control form-control-sm"
+                            placeholder="e.g. Classic T-Shirt">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="compact-label">Category</label>
+                        <select formControlName="category" class="form-select form-select-sm">
+                            <option value="casual">Casual</option>
+                            <option value="formal">Formal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-md-3">
+                        <label class="compact-label">Price ($)</label>
+                        <input type="number" formControlName="price" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="compact-label">Old Price</label>
+                        <input type="number" formControlName="oldPrice" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="compact-label">Stock</label>
+                        <input type="number" formControlName="stock" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end justify-content-end pb-1">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" formControlName="isActive" id="live">
+                            <label class="form-check-label small fw-bold text-muted" for="live">Active</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="compact-label">Product Colors</label>
+                    <div class="d-flex gap-2">
+                        <input type="color" formControlName="tempColor"
+                            class="form-control form-control-color border-0 p-0" style="width: 40px; height: 32px;">
+                        <button type="button" (click)="addColor()"
+                            class="btn btn-outline-primary btn-sm fw-bold border-2">+ Add Color</button>
+                    </div>
+                    @if (selectedColors.length > 0) {
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        @for (color of selectedColors; track $index) {
+                        <div class="badge-color d-flex align-items-center" [style.background-color]="color">
+                            <span class="me-2">{{color}}</span>
+                            <i class="bi bi-x-circle-fill cursor-pointer" (click)="removeColor($index)"></i>
+                        </div>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6">
+                        <label class="compact-label">Sizes (S, M, L...)</label>
+                        <input type="text" formControlName="sizes" class="form-control form-control-sm"
+                            placeholder="e.g. S, M, XL">
+                        <small class="text-primary" style="font-size: 9px;">Auto-converts to Full Names</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="compact-label">Tags</label>
+                        <input type="text" formControlName="tags" class="form-control form-control-sm"
+                            placeholder="new, summer, cotton">
+                    </div>
+                </div>
+
+                <div class="mb-3 border p-2 rounded bg-light-subtle">
+                    <label class="compact-label">Product Gallery (Multiple Images)</label>
+                    <div class="input-group input-group-sm mb-2">
+                        <input type="text" formControlName="tempGalleryUrl" class="form-control"
+                            placeholder="Paste image URL here...">
+                        <button type="button" class="btn btn-outline-secondary fw-bold" (click)="addToGallery()">+ Add
+                            to Gallery</button>
+                    </div>
+                    @if (gallery.length > 0) {
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <div *ngFor="let img of gallery; let i = index" class="gallery-item position-relative">
+                            <img [src]="img" class="rounded border shadow-sm"
+                                style="width: 60px; height: 60px; object-fit: cover;">
+                            <button type="button" (click)="removeFromGallery(i)"
+                                class="btn btn-danger btn-xs position-absolute top-0 end-0 rounded-circle shadow-sm"
+                                style="padding: 0px 4px; font-size: 10px;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label class="compact-label">Main Thumbnail Image URL</label>
+                    <input type="text" formControlName="imageUrl" class="form-control form-control-sm"
+                        placeholder="Primary image for listing">
+                </div>
+
+                <div class="mb-4">
+                    <label class="compact-label">Description</label>
+                    <textarea formControlName="description" rows="2" class="form-control form-control-sm"></textarea>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-end pt-3 border-top">
+                    <button type="button" class="btn btn-light btn-sm px-4 fw-bold text-muted">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold shadow-sm"
+                        [disabled]="productForm.invalid">
+                        Save Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

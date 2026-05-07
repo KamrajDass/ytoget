@@ -1,0 +1,36 @@
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+**/coverage/
+**/.angular/
+**/.cache/
+**/tmp/
+**/out-tsc/
+
+# Logs
+**/*.log
+npm-debug.log*
+yarn-error.log*
+
+# Environment files
+**/.env
+**/.env.*
+
+# Editor/system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Firebase local state
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Local binaries and archives
+*.zip
+*.mp4
+*.mp3

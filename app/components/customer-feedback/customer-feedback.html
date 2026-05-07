@@ -1,0 +1,31 @@
+<section class="container px-sm-0 mt-5 pt-4">
+    <div class="header">
+        <h1  class="text-start fw-bold">OUR HAPPY CUSTOMERS</h1>
+        <div class="slider-buttons">
+            <button (click)="prev()"><i class="bi bi-arrow-left"></i></button>
+            <button (click)="next()"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="slider-wrapper">
+        <div class="slides" [style.transform]="'translateX(-' + (currentIndex * 33.33) + '%)'">
+            @for (item of slides; track $index) {
+            <div class="slide px-1">
+                <div class="card">
+                    <div class="rating">
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+                        <span>⭐</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>{{ item.customerName }}</h3>
+                        <p>{{ item.comment }}</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

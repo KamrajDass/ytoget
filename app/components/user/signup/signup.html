@@ -1,0 +1,86 @@
+<div class="signup-page">
+    <div class="compact-card">
+
+        <div class="image-box">
+            <div class="overlay">
+                <h2 class="brand-name">SHOP<span>.CO</span></h2>
+            </div>
+        </div>
+
+        <div class="form-box">
+
+            @if (!isRegistered()) {
+            <div class="header">
+                <span class="brand">JOIN US</span>
+                <p class="tagline">Create your shop account</p>
+            </div>
+
+            <form class="mini-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="input-item">
+                    <i class="bi bi-person"></i>
+                    <input type="text" formControlName="name" placeholder="Full Name">
+                </div>
+
+                <div class="input-item">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" formControlName="email" placeholder="Email Address">
+                </div>
+
+                <div class="input-item password-container">
+                    <i class="bi bi-shield-lock"></i>
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password"
+                        placeholder="Password">
+                    <span class="toggle-eye" (click)="togglePasswordVisibility()">
+                        <i class="bi" [ngClass]="isPasswordVisible ? 'bi-eye' : 'bi-eye-slash'"></i>
+                    </span>
+                </div>
+
+                <div class="input-item password-container">
+                    <i class="bi bi-shield-check"></i>
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="confirmPassword"
+                        placeholder="Confirm Password">
+                    <span class="toggle-eye" (click)="togglePasswordVisibility()">
+                        <i class="bi" [ngClass]="isPasswordVisible ? 'bi-eye' : 'bi-eye-slash'"></i>
+                    </span>
+                </div>
+
+                @if (signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched) {
+                <div style="color: #ff3333; font-size: 0.8rem; margin-bottom: 10px;">
+                    <i class="bi bi-exclamation-circle"></i> Passwords do not match!
+                </div>
+                }
+
+                <button type="submit" class="btn submit-btn" [disabled]="signupForm.invalid || isSubmitting()">
+                    @if (isSubmitting()) {
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    }
+                    Sign Up <i class="bi bi-arrow-right-short"></i>
+                </button>
+   
+                <p class="switch">Already have an account? <a routerLink="/user/login">Login</a></p>
+            </form>     
+            } @else {
+            <div class="verify-step text-center">
+                <div class="success-icon-wrap mb-4">
+                    <i class="bi bi-envelope-check-fill text-success" style="font-size: 60px;"></i>
+                </div>
+                <h2 class="brand" style="font-size: 24px; font-weight: 800;">CHECK YOUR EMAIL</h2>
+                <p class="tagline mt-2" style="color: #666; font-size: 14px; line-height: 1.6;">
+                    Humne ek activation link <b>{{ signupForm.get('email')?.value }}</b> par bhej diya hai.
+                    Please apna inbox check karein.
+                </p>
+
+                <button class="btn submit-btn mt-4" routerLink="/login">
+                    Go to Login <i class="bi bi-box-arrow-in-right"></i>
+                </button>
+
+                <p class="mt-4" style="font-size: 13px; color: #999;">
+                    Email nahi mila? <a href="javascript:void(0)" (click)="isRegistered.set(false)"
+                        style="color: #000; font-weight: 600;">Try Again</a>
+                </p>
+            </div>
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="verify-wrapper">
+    <div class="verify-card">
+
+        @if (status() === 'loading') {
+        <div class="state-content">
+            <div class="spinner"></div>
+            <h2>Verifying Your Email</h2>
+            <p>Thora intezar karein, hum aapka account activate kar rahe hain...</p>
+        </div>
+        }
+
+        @else if (status() === 'success') {
+        <div class="state-content success">
+            <div class="icon-circle">
+                <i class="bi bi-check-lg"></i>
+            </div>
+            <h2>Email Verified!</h2>
+            <p>Aapka account ab tayyar hai. Aapko 5 seconds mein login page par bhej diya jayega.</p>
+            <button class="btn-primary" routerLink="/login">LOGIN NOW</button>
+        </div>
+        }
+
+        @else if (status() === 'error') {
+        <div class="state-content error">
+            <div class="icon-circle">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <h2>Verification Failed</h2>
+            <p>{{ errorMessage() }}</p>
+            <button class="btn-outline" routerLink="/register">RESEND LINK</button>
+        </div>
+        }
+
+    </div>
+</div>

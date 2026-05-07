@@ -1,0 +1,84 @@
+/* Base Table Reset */
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table thead th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.responsive-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover effect khatam karne ke liye */
+.responsive-table tbody tr:hover {
+  background-color: transparent !important;
+}
+
+.edit-input {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+}
+
+/* Mobile Screens (Max 767px) */
+@media screen and (max-width: 767px) {
+  .responsive-table thead {
+    display: none; /* Desktop header hide kar dein */
+  }
+
+  .responsive-table tbody tr {
+    display: block;
+    border: 1px solid #dee2e6;
+    margin: 15px;
+    border-radius: 12px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  .responsive-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px 5px;
+  }
+
+  .responsive-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  /* data-label se heading dikhayein */
+  .responsive-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #6c757d;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .edit-input {
+    width: 60%; /* Mobile par input chota rakhein */
+  }
+
+  .action-btns {
+    width: 100%;
+  }
+}
+
+/* Status Styling */
+.badge-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-status.active { color: #198754; }
+.badge-status::before { content: "●"; margin-right: 5px; }

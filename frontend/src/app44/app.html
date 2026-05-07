@@ -1,0 +1,46 @@
+<header class="promo-strip text-white">
+  <div class="promo-inner">
+    <p>Sign up and get 20% off to your first order. <a routerLink="/signup">Sign Up Now</a></p>
+    <button type="button" aria-label="Close">x</button>
+  </div>
+</header>
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
+  <div class="container page-wrap">
+    <a class="navbar-brand fw-black" routerLink="/">SHOP.CO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="mainNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/shop" routerLinkActive="active">On Sale</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active">New Arrivals</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/shop" routerLinkActive="active">Brands</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/cart" routerLinkActive="active">Cart</a></li>
+        @if (auth.user()?.role === 'admin') {
+          <li class="nav-item"><a class="nav-link" routerLink="/dashboard/overview" routerLinkActive="active">Dashboard</a></li>
+        }
+        @if (!auth.isLoggedIn()) {
+          <li class="nav-item"><a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign Up</a></li>
+        } @else {
+          <li class="nav-item"><a class="nav-link" routerLink="/account/profile" routerLinkActive="active">Account</a></li>
+          <li class="nav-item"><button class="btn btn-sm btn-outline-dark ms-lg-2" (click)="logout()">Logout</button></li>
+        }
+      </ul>
+      <div class="search-box me-3">
+        <i class="bi bi-search"></i>
+        <input class="form-control rounded-pill" placeholder="Search for products..." />
+      </div>
+      <div class="nav-icons">
+        <a routerLink="/cart" aria-label="Cart"><i class="bi bi-cart2"></i></a>
+        <a [routerLink]="auth.isLoggedIn() ? '/account/profile' : '/login'" aria-label="Account"><i class="bi bi-person-circle"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container page-wrap pb-5">
+  <router-outlet />
+</main>

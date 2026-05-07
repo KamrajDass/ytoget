@@ -1,0 +1,378 @@
+:host {
+    display: block;
+    --primary-teal: #2c5f50;
+    --bg-cream: #fdf8f3;
+    --text-dark: #1a1310;
+    --text-muted: #8b7e74;
+    --border-light: #f2e6d9;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.orders-card {
+    background: var(--bg-cream);
+    padding: 25px;
+    border-radius: 24px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header Adjustments */
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.refresh-btn {
+    background: white;
+    border: 1px solid var(--text-dark);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Table Management */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.responsive-table th {
+    text-align: left;
+    padding: 15px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.responsive-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.clickable-row:hover {
+    background-color: rgba(44, 95, 80, 0.03);
+}
+
+/* Visibility Classes */
+.desktop-only {
+    display: table-cell;
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Update Icon Button Styling */
+.edit-icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-teal);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.edit-icon-btn:hover {
+    background-color: rgba(44, 95, 80, 0.1);
+    transform: scale(1.1);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (1000px & Below)
+   ========================================= */
+@media (max-width: 1000px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .orders-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .responsive-table {
+        min-width: 100%;
+    }
+
+    /* Mobile par table ko Clean Cards jaisa dikhana */
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        margin-bottom: 10px;
+        border-radius: 16px;
+        padding: 5px 15px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-light);
+    }
+
+    .responsive-table td {
+        border: none;
+        padding: 12px 5px;
+    }
+
+    /* Status Dot Styling */
+    .status-icon {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .status-icon[data-status="pending"] {
+        background: #f7b731;
+    }
+
+    .status-icon[data-status="shipped"] {
+        background: #4b7bec;
+    }
+
+    .status-icon[data-status="delivered"] {
+        background: #20bf6b;
+    }
+
+    .responsive-table tr {
+        position: relative;
+    }
+
+    /* Mobile par icon ko corner mein ya proper alignment mein lane ke liye */
+    .edit-icon-btn {
+        font-size: 1.4rem;
+        padding: 10px;
+    }
+
+}
+
+/* =========================================
+   MODAL ENHANCEMENTS (The "Real" Fix)
+   ========================================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 19, 16, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Mobile: bottom up */
+}
+
+.order-details-modal {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 100px;
+    border-radius: 24px !important;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.highlight-group {
+    background: #fdfaf7;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+}
+
+.edit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* Modal Select Styling */
+.modal-select-wrapper select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 1rem;
+}
+
+.modal-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white; 
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.btn-primary-action {
+    background: var(--primary-teal);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* =========================================
+   302px & Small Mobile Optimization
+   ========================================= */
+@media (max-width: 480px) {
+    .orders-card {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .header-left h3 {
+        font-size: 1.1rem;
+        /* Heading thodi choti ki */
+    }
+
+    /* Table Row Adjustment */
+    .responsive-table tr {
+        flex-direction: column;
+        /* Content ko stack kiya */
+        align-items: flex-start;
+        padding: 12px;
+        position: relative;
+    }
+
+    .responsive-table td {
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Order ID and Status ko ek line mein lane ke liye */
+    .responsive-table td:first-child {
+        border-bottom: 1px solid var(--border-light);
+        margin-bottom: 5px;
+        padding-bottom: 8px;
+    }
+
+    /* Action button (Pencil) ko corner mein set kiya */
+    .text-center {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    /* --- Modal Adjustments (Design Same, Alignment Fix) --- */
+    .order-details-modal {
+        max-height: 90vh;
+    }
+
+    .modal-body {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        /* 2 columns ki jagah 1 column (302px par space nahi hoti) */
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        /* Total aur Button ko upar niche kiya */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .total-block {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-primary-action {
+        width: 100%;
+        /* Button full width kiya taaki click karne mein aasani ho */
+    }
+}
+
+/* Extra small screens like 302px */
+@media (max-width: 320px) {
+    .order-id {
+        font-size: 0.8rem;
+    }
+
+    .customer-name {
+        font-size: 0.9rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.1rem;
+    }
+}

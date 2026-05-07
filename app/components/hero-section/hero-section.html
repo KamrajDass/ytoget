@@ -1,0 +1,26 @@
+<div class="carousel">
+    <div class="carousel-slides">
+        <div class="slide s1">
+            <div class="single-slide">
+                <div class="slide-content">
+                    <div class="text">
+                        <h1 class="text-bolder text-uppercase">{{carsouselData.heading}}</h1>
+                        <p class="my-4">{{carsouselData.description}}</p>
+                         <button class="btn d-block mt-5 fw-bolder">{{carsouselData.ctaLabel}}</button>
+                        <div class="stats mt-5">
+                            @for(item of status; track item){
+                            <div class="label">
+                                <strong>{{item.value}}</strong>
+                                <p class="textlabel">{{item.label}}</p>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="image mt-3 mt-lg-0">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80"
+                            alt="Hero">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

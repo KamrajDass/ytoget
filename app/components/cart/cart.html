@@ -1,0 +1,164 @@
+<div class="container px-0">
+  <div class="cart-container px-0">
+    @if (cartItems().length > 0) {
+    <h1 class="cart-title">YOUR CART</h1>
+    <div class="cart-layout">
+
+      <div class="items-wrap">
+        @for (item of cartItems(); track item.productId; let last = $last) {
+        <div class="cart-item">
+          <div class="item-img">
+            <img [src]="item.imageUrl" [alt]="item.name">
+          </div>
+          <div class="item-details">
+            <div class="details-top">
+              <h3>{{ item.name }}</h3>
+              <button class="delete-btn" (click)="removeItem(item.productId)">
+                <i class="bi bi-trash-fill text-danger"></i>
+              </button>
+            </div>
+            <p>Size: <span>{{ item.size || 'Standard' }}</span></p>
+            <div class="item-color-info">
+              <p>Color:
+                <span class="color-circle" [style.background-color]="item.color"></span>
+              </p>
+            </div>
+
+            <div class="details-bottom">
+              <span class="price">${{ item.price }}</span>
+              <div class="qty-control">
+                <button (click)="updateQuantity(item.productId, -1, item.quantity)">
+                  <i class="bi bi-dash"></i>
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="updateQuantity(item.productId, 1, item.quantity)">
+                  <i class="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        @if (!last) {
+        <hr class="divider"> }
+        }
+      </div>
+
+      <div class="summary-wrap">
+        <h3>Order Summary</h3>
+        <div class="row">
+          <span>Subtotal</span>
+          <b>${{ cartResponse?.subtotal || 0 }}</b>
+        </div>
+        <div class="row">
+          <span>Discount (-20%)</span>
+          <b class="text-danger">-${{ (cartResponse?.subtotal * 0.20).toFixed(2) }}</b>
+        </div>
+        <div class="row">
+          <span>Delivery Fee</span>
+          <b>${{ deliveryFee }}</b>
+        </div>
+        <hr>
+        <div class="row total">
+          <span>Total</span>
+          <b>${{ totalAmount() + deliveryFee }}</b>
+        </div>
+        <div class="promo-box">
+          <div class="input-field">
+            <i class="bi bi-tag"></i>
+            <input type="text" placeholder="Add promo code">
+          </div>
+          <button class="apply-btn">Apply</button>
+        </div>
+
+        <button class="checkout-btn" (click)="openModal()">
+          Go to Checkout <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+    } @else {
+    <div class="text-center py-5">
+      <i class="bi bi-cart-x fs-1"></i>
+      <p class="mt-3">Aapka cart khali hai!</p>
+      <button class="btn btn-dark rounded-pill px-4" routerLink="/shop">Abhi Shopping Karein</button>
+    </div>
+    }
+  </div>
+
+  <div class="checkout-overlay" [class.active]="isOpen()" (click)="closeModal()">
+    <div class="checkout-modal-card" (click)="$event.stopPropagation()">
+
+      <button class="btn-modal-close" (click)="closeModal()">
+        <i class="bi bi-x"></i>
+      </button>
+
+      <div class="modal-grid-container">
+        <div class="billing-form-area">
+          <h2 class="modal-title">Finalize Order</h2>
+          <form [formGroup]="checkoutForm" (ngSubmit)="confirmOrder()">
+            <div class="modal-form-group">
+              <label>Shipping Address</label>
+              <input type="text" formControlName="address" placeholder="Flat / House No, Building">
+            </div>
+
+            <div class="modal-form-group">
+              <label>Town / City</label>
+              <input type="text" formControlName="city" placeholder="E.g. Karachi, Lahore">
+            </div>
+
+            <div class="modal-form-group">
+              <label>Payment Method</label>
+              <div class="payment-cards-row">
+                <label class="pay-card-item">
+                  <input type="radio" formControlName="payment" value="card">
+                  <div class="pay-card-ui"><i class="bi bi-credit-card-2-front"></i> Card</div>
+                </label>
+                <label class="pay-card-item">
+                  <input type="radio" formControlName="payment" value="cod">
+                  <div class="pay-card-ui"><i class="bi bi-wallet2"></i> Cash</div>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-finalize-order" [disabled]="checkoutForm.invalid">
+              Confirm Payment (${{ totalAmount() + deliveryFee }})
+            </button>
+          </form>
+        </div>
+
+        <div class="modal-summary-area">
+          <h4 style="margin-bottom: 20px; font-weight: 700;">Summary</h4>
+          <div class="mini-items-list">
+            @for (item of cartItems(); track item.productId) {
+            <div class="mini-item-row">
+              <span>{{ item.name }} (x{{item.quantity}})</span>
+              <b>${{ item.price * item.quantity }}</b>
+            </div>
+            }
+          </div>
+          <hr>
+          <div class="mini-item-row" style="margin-top: 15px; font-weight: 700; font-size: 16px;">
+            <span>Total Amount</span>
+            <span>${{ totalAmount() + deliveryFee }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<div class="delete-toast shadow-lg" [class.show]="isVisible">
+  <div class="toast-content">
+    <div class="icon-box">
+      <i class="bi bi-trash3-fill"></i>
+    </div>
+    <div class="message-box">
+      <span class="title">Item Deleted</span>
+      <span class="subtitle">The product has been removed from cart.</span>
+    </div>
+    <button class="btn-close-toast" (click)="closeToast()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="progress-bar"></div>
+</div>

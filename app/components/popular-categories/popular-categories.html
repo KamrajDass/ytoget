@@ -1,0 +1,45 @@
+<div class="promo-box container my-5">
+    
+    <h1 class="text-center fw-bold mb-4">BROWSE BY DRESS STYLE</h1>
+    <!-- Row 1 -->
+    <div class="row my-3 align-items-center">
+        <!-- Small Image Left -->
+        <div class="catgr col-md-4 col-12 mb-3 mb-md-0 position-relative" routerLink="/category">
+            <div class="img-wrapper">
+                <img [src]="categories[0]?.imageUrl" class="img-fluid small-img">
+                <h3 class="img-title">{{categories[0]?.title}}</h3>
+            </div>
+        </div>
+
+        <!-- Big Image Right -->
+        <div class="catgr col-md-8 col-12 position-relative" routerLink="/category">
+            <div class="img-wrapper">
+                <img [src]="categories[1]?.imageUrl" class="img-fluid big-img">
+                <h3 class="img-title">{{categories[1]?.title}}</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row align-items-center">
+
+        <!-- Big Image Left -->
+        <div class="catgr col-md-8 col-12 position-relative" routerLink="/category">
+            <div class="img-wrapper">
+                <img [src]="categories[2]?.imageUrl" class="img-fluid big-img mb-3 mb-md-0">
+                <h3 class="img-title">{{categories[2]?.title}}</h3>
+            </div>
+        </div>
+
+        <!-- Small Image Right -->
+        <div class="catgr col-md-4 col-12 position-relative" routerLink="/category">
+            <div class="img-wrapper">
+                <img [src]="categories[3]?.imageUrl" class="img-fluid small-img">
+                <h3 class="img-title">{{categories[3]?.title}}</h3>
+            </div>
+        </div>
+
+    </div>
+
+</div>

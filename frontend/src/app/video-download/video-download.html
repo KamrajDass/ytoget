@@ -1,0 +1,122 @@
+<section class="video-download-page">
+  <div class="download-card">
+    <!-- <h2 class="title">YouTube Video Downloader</h2>
+    <p class="subtitle">Paste a YouTube URL, submit, and your video download will start.</p> -->
+
+    <form (ngSubmit)="submit()" #downloadForm="ngForm" class="download-form">
+      <label for="videoUrl">YouTube URL</label>
+      <input
+        id="videoUrl"
+        name="videoUrl"
+        type="url"
+        [(ngModel)]="videoUrl"
+        (ngModelChange)="onUrlChange()"
+        required
+        placeholder="https://www.youtube.com/watch?v=..."
+      />
+
+      <button type="button" [disabled]="isFetchingInfo || !downloadForm.form.valid" (click)="fetchVideoInfo()">
+        {{ isFetchingInfo ? 'Fetching info...' : 'Fetch Video Info' }}
+      </button>
+
+      @if (infoLoaded) {
+        <div class="video-preview">
+          @if (thumbnailUrl) {
+            <img [src]="thumbnailUrl" alt="Video thumbnail" class="video-thumb" />
+          }
+          <div class="video-meta">
+            <p class="video-title">{{ videoTitle }}</p>
+            <p class="video-duration">Duration: {{ durationLabel }}</p>
+          </div>
+        </div>
+      }
+
+      <label for="fileName">File name (optional)</label>
+      <input
+        id="fileName"
+        name="fileName"
+        type="text"
+        [(ngModel)]="fileName"
+        placeholder="youtube-video"
+      />
+
+      <div class="format-section">
+        <span class="format-label">Format</span>
+        <div class="format-group">
+          <span class="format-group-label">Video (MP4)</span>
+          <div class="format-chips">
+            @for (opt of videoFormatOptions; track opt.key) {
+              <button
+                type="button"
+                class="format-chip"
+                [disabled]="!infoLoaded || !isFormatAvailable(opt.key)"
+                [class.active]="selectedFormat === opt.key"
+                (click)="selectedFormat = opt.key"
+              >
+                {{ opt.label }}
+                @if (formatSizeLabel(opt.sizeBytes)) {
+                  <span class="chip-size">• {{ formatSizeLabel(opt.sizeBytes) }}</span>
+                }
+              </button>
+            }
+          </div>
+        </div>
+        <div class="format-group">
+          <span class="format-group-label">Audio</span>
+          <div class="format-chips">
+            @for (opt of audioFormatOptions; track opt.key) {
+              <button
+                type="button"
+                class="format-chip"
+                [disabled]="!infoLoaded || !isFormatAvailable(opt.key)"
+                [class.active]="selectedFormat === opt.key"
+                (click)="selectedFormat = opt.key"
+              >
+                {{ opt.label }}
+                @if (formatSizeLabel(opt.sizeBytes)) {
+                  <span class="chip-size">• {{ formatSizeLabel(opt.sizeBytes) }}</span>
+                }
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="isDownloading || !downloadForm.form.valid || !infoLoaded">
+        {{ isDownloading ? 'Downloading...' : 'Download' }}
+      </button>
+    </form>
+
+    @if (isDownloading) {
+      <div class="progress-wrap">
+        <div class="progress-heading-row">
+          <span class="progress-heading">{{ progressHeaderLabel }}</span>
+          @if (progressPercent !== null) {
+            <span class="progress-pct">{{ progressPercent }}%</span>
+          }
+        </div>
+        @if (showDeterminateProgress) {
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" [style.width.%]="progressPercent"></div>
+          </div>
+        } @else {
+          <div class="progress-bar-track">
+            <div class="progress-bar-indeterminate"></div>
+          </div>
+        }
+        <div class="progress-info progress-transfer-row">
+          <span>{{ progressTransferLabel }}</span>
+        </div>
+        <p class="progress-status">{{ progressStatusLabel }}</p>
+      </div>
+    }
+
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+  </div>
+</section>

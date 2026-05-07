@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  background-color: #f1f5f9;
+  
+}
+
+.custom-card {
+  max-width: 650px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.compact-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 2px;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+.form-control-sm, .form-select-sm {
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: #fcfcfd;
+}
+
+.form-control-color {
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Multi-Color Badges */
+.badge-color {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+.cursor-pointer { cursor: pointer; }
+
+.btn-primary {
+  background-color: #0f172a;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #334155;
+}
+
+.form-check-input:checked {
+  background-color: #10b981;
+  border-color: #10b981;
+}/* Gallery Item Styling */
+.gallery-item {
+  transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.btn-xs {
+  line-height: 1;
+  z-index: 5;
+}
+
+/* Rest of the previous CSS... */

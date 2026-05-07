@@ -1,0 +1,510 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.breadcrumb {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.breadcrumb span {
+    color: #000;
+    font-weight: 500;
+}
+
+.product-main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Gallery */
+.gallery-section {
+    display: flex;
+    gap: 15px;
+}
+
+.thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.thumb-card {
+    width: 120px;
+    height: 120px;
+    background: #F0EEED;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+
+    /* FIX: Flexbox center taaki choti thumbnails beech mein rahein */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb-card.active {
+    border-color: #000;
+}
+
+.thumb-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Agar image square nahi hai to bhi box fill rahega */
+    background: #F0EEED;
+}
+
+.main-img-container {
+    flex: 1;
+    background: #F0EEED;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* FIX: Fixed height taaki layout move na ho */
+    height: 530px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-img {
+    /* FIX: Image container ke hisaab se adjust hogi bina shape bigde */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Choti image ko center mein rakhega bina container hilaaye */
+    padding: 20px;
+
+}
+
+/* Info */
+.info-section h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.rating {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.stars {
+    color: #FFC633;
+    font-size: 20px;
+}
+
+.score {
+    color: #666;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.current-price {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.old-price {
+    font-size: 24px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.discount-tag {
+    background: #FF33331A;
+    color: #FF3333;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #b9b9b9;
+    margin: 20px 0;
+}
+
+.label {
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.color-list {
+    display: flex;
+    gap: 12px;
+}
+
+.color-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #0001;
+    cursor: pointer;
+    color: white;
+}
+
+.size-list {
+    display: flex;
+    gap: 10px;
+}
+
+.size-btn {
+    padding: 10px 24px;
+    border-radius: 30px;
+    border: none;
+    background: #F0F0F0;
+    color: #666;
+    cursor: pointer;
+}
+
+.size-btn.active {
+    background: #000;
+    color: #fff;
+}
+
+.cart-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.qty-btn {
+    display: flex;
+    align-items: center;
+    background: #F0F0F0;
+    border-radius: 30px;
+    padding: 10px 20px;
+    gap: 20px;
+}
+
+.qty-btn button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.add-to-cart {
+    flex: 1;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Tabs & Reviews */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 40px;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 20px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tabs .active-tab {
+    color: #000;
+    border-bottom: 2px solid #000;
+    font-weight: 600;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-icon {
+    background: #F0F0F0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sort-btn {
+    background: #F0F0F0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.write-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.review-card {
+    border: 1px solid #E6E6E6;
+    border-radius: 20px;
+    padding: 25px;
+    position: relative;
+}
+
+.review-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.verified {
+    color: #01AB31;
+    font-size: 14px;
+}
+
+.posted-date {
+    color: #666;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.load-more {
+    display: block;
+    margin: 40px auto;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: 1px solid #E6E6E6;
+    background: white;
+    cursor: pointer;
+}
+
+.add-to-cart:disabled {
+    background-color: #999 !important;
+    /* Grey color */
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.qty-btn button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.box-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    width: 218px;
+    height: 52px;
+    border-radius: 30px;
+    color: black;
+    background: linear-gradient(to right, black 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    border: 1px solid #000;
+    transition: all 0.5s ease;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect */
+.btn:hover {
+    color: white;
+    background-position: left bottom;
+    /* left → right sliding */
+}
+
+/* desktop 4 cards */
+app-card {
+    width: calc(25% - 20px);
+}
+
+
+@media (max-width: 992px) {
+    .product-main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .main-img-container {
+        order: 1;
+        /* Main image upar */
+        height: auto;
+        aspect-ratio: 1/1;
+        /* Square ratio maintain rahega */
+        max-height: 400px;
+    }
+
+    .main-img {
+        max-width: 85%;
+        max-height: 85%;
+        padding: 0px;
+    }
+
+    .gallery-section {
+        flex-direction: column;
+        /* Screenshot ke mutabiq main image pehle, thumbs niche */
+        align-items: center;
+        /* Horizontal centering */
+    }
+
+    .thumbs {
+        flex-direction: row;
+        overflow-x: auto;
+        /* Slideable thumbnails */
+        width: 100%;
+        padding-bottom: 10px;
+        order: 2;
+        /* Thumbs niche jayenge */
+    }
+
+    .info-section {
+        text-align: left;
+        /* Text alignment left hi rakhein professional look ke liye */
+    }
+
+    .info-section h1 {
+        font-size: 24px;
+        /* Title size thoda aur kam kiya */
+        margin-top: 10px;
+    }
+
+    .gallery-section {
+        flex-direction: column;
+        /* Screenshot ke mutabiq main image pehle, thumbs niche */
+        align-items: center;
+        /* Horizontal centering */
+    }
+
+    .thumb-card {
+        min-width: 70px;
+        /* Thumbs thode aur chhote mobile ke liye */
+        height: 70px;
+        flex-shrink: 0;
+    }
+
+    .info-section {
+        text-align: left;
+        /* Text alignment left hi rakhein professional look ke liye */
+    }
+
+    .info-section h1 {
+        font-size: 24px;
+        /* Title size thoda aur kam kiya */
+        margin-top: 10px;
+    }
+
+    app-card {
+        width: calc(50% - 20px);
+    }
+}
+
+/* Small Mobile (Below 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .cart-row {
+        flex-direction: column;
+        /* Qty aur Add to Cart ek ke niche ek */
+    }
+
+    .qty-btn {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .add-to-cart {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        /* Reviews single column */
+    }
+
+    .reviews-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .review-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .tabs button {
+        padding: 15px 5px;
+        font-size: 14px;
+    }
+
+    .price-row .current-price {
+        font-size: 24px;
+    }
+
+    app-card {
+        width: calc(50% - 10px);
+    }
+}
+
+/* Button & Labels responsiveness */
+@media (max-width: 400px) {
+    .price-row {
+        flex-wrap: wrap;
+        /* Price aur discount line break kar sakein */
+    }
+
+    .size-btn {
+        padding: 8px 15px;
+        /* Choti screen par buttons chhote */
+        font-size: 12px;
+    }
+}

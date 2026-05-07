@@ -1,0 +1,57 @@
+<div class="users-card">
+    <div class="header-section">
+        <div class="header-text">
+            <span class="label">USERS</span>
+            <h3>Manage accounts</h3>
+            <p class="subtext">Review roles, verification state, and remove users directly from live backend data.</p>
+        </div>
+        <button class="btn btn-refresh" (click)="refreshUsers()">Refresh</button>
+    </div>
+
+    <div class="table-container">
+        <table class="account-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>EmailVerified</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of users; track user._id) {
+                <tr>
+                    <td data-label="Name">
+                        <div class="name-id-block">
+                            <span class="user-name">{{user.name}}</span>
+                            <span class="user-id">ID {{user._id | slice:0:6}}</span>
+                        </div>
+                    </td>
+                    <td data-label="Email">
+                        <span class="user-email">{{user.email}}</span>
+                    </td>
+                    <td data-label="Role">
+                        <div class="role-select-wrapper">
+                            <select [(ngModel)]="user.role" (change)="updateUserRole(user)">
+                                <option value="customer">customer</option>
+                                <option value="admin">admin</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td data-label="Verified">
+                        <span class="verified-text">{{user.isEmailVerified}}</span>
+                    </td>
+                    <td data-label="Created">
+                        <span class="created-date">{{user.createdAt | date}}</span>
+                    </td>
+                    <td data-label="Actions" class="text-center">
+                        <button class="btn btn-delete" (click)="deleteUser(user._id)">Delete</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

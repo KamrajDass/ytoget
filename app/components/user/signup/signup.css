@@ -1,0 +1,238 @@
+.signup-page {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.compact-card {
+    display: flex;
+    width: 750px;
+    /* Chota size lekin side-by-side */
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Left Image Box */
+.image-box {
+    flex: 0.8;
+    /* Form se thora chota */
+    background: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: 450px;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand {
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+}
+
+/* Right Form Box */
+.form-box {
+    flex: 1;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header h3 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #2d3436;
+}
+
+.header p {
+    font-size: 0.85rem;
+    color: #a4b0be;
+    margin-bottom: 25px;
+}
+
+.input-item {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.input-item i {
+    color: #636e72;
+    margin-right: 12px;
+    font-size: 0.9rem;
+}
+
+.input-item input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+/* Gender Row */
+.gender-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.gender-row label {
+    flex: 1;
+    cursor: pointer;
+}
+
+.gender-row input {
+    display: none;
+}
+
+.gender-row span {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #dfe4ea;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.gender-row input:checked+span {
+    background: #2d3436;
+    color: white;
+    border-color: #2d3436;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #e84118;
+    transform: translateY(-1px);
+}
+
+.switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #636e72;
+}
+
+.switch a {
+    color: #2d3436;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.brand-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #dfe4ea;
+}
+
+.brand-name span {
+    color: #ff4757;
+}
+
+.password-container {
+    position: relative;
+    /* Eye icon ko position dene ke liye */
+}
+
+.password-container input {
+    padding-right: 40px !important;
+    /* Eye icon ke liye jagah */
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    color: #a4b0be;
+    transition: 0.3s;
+}
+
+.toggle-eye:hover {
+    color: #2d3436;
+    /* Hover par dark ho jayega */
+}
+
+.verify-step {
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-icon-wrap {
+    background: #f0fdf4;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.2em;
+}
+
+/* Responsive Logic */
+@media (max-width: 600px) {
+    .image-box {
+        display: none;
+    }
+
+    /* Mobile par image hide ho jaye gi size chota karne ke liye */
+    .compact-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .form-box {
+        padding: 25px;
+    }
+}

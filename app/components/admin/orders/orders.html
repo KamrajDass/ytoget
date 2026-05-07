@@ -1,0 +1,124 @@
+<div class="orders-card">
+    <div class="orders-header">
+        <div class="header-left">
+            <span class="label">ORDERS</span>
+            <h3>Manage fulfillment and payments</h3>
+            <p class="subtext">Click on any order to view full details.</p>
+        </div>
+        <button class="refresh-btn" (click)="refreshData()">Refresh</button>
+    </div>
+
+    <div class="table-container">
+        <table class="responsive-table modal-enabled-table">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th class="desktop-only">Payment</th>
+                    <th class="desktop-only">Date</th>
+                    <th class="text-end">Total</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (order of orders; track order._id) {
+                <tr>
+                    <td>
+                        <div class="order-id-block">
+                            <span class="order-id">#{{order._id | slice:0:6}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="customer-name">{{order.customerName}}</span>
+                    </td>
+                    <td>
+                        <div class="select-wrapper desktop-only">
+                            {{order.status}}
+                        </div>
+                        <div class="status-dot-container mobile-only">
+                            <span class="status-icon" [attr.data-status]="order.status"></span>
+                            <span style="font-size: 0.8rem; font-weight: 600;">{{order.status}}</span>
+                        </div>
+                    </td>
+                    <td class="desktop-only">{{order.paymentStatus}}</td>
+                    <td class="desktop-only">{{order.updatedAt | date}}</td>
+                    <td class="text-end">${{order.total}}</td>
+
+                    <td class="text-center">
+                        <button class="edit-icon-btn" (click)="openOrderDetails(order)" title="Update Order">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (selectedOrder) {
+    <div class="modal-backdrop" (click)="closeModal()">
+        <div class="order-details-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Order Details</h2>
+                <button class="close-modal-btn" (click)="closeModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="info-group highlight-group">
+                    <label>Order ID</label>
+                    <span class="value">#{{selectedOrder._id}}</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-group">
+                        <label>Customer</label>
+                        <span class="value teal-text">{{selectedOrder.customerName}}</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Date</label>
+                        <span class="value">{{selectedOrder.updatedAt | date:'mediumDate'}}</span>
+                    </div>
+                </div>
+
+                <div class="edit-section">
+                    <div class="info-group">
+                        <label>Fulfillment Status</label>
+                        <div class="modal-select-wrapper">
+                            <select [(ngModel)]="selectedOrder.status">
+                                <option value="pending">pending</option>
+                                <option value="shipped">shipped</option>
+                                <option value="delivered">completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="info-group">
+                        <label>Payment Status</label>
+                        <div class="modal-select-wrapper">
+                            <select [(ngModel)]="selectedOrder.paymentStatus">
+                                <option value="pending">pending</option>
+                                <option value="paid">paid</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-group payment-method">
+                    <label>Payment Method</label>
+                    <span class="value">{{selectedOrder.paymentMethod || 'COD'}}</span>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="total-block">
+                    <label>Order Total</label>
+                    <span class="modal-total">${{selectedOrder.total}}.00</span>
+                </div>
+                <button class="btn-primary-action" (click)="saveOrder(selectedOrder)">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    }
+
+</div>

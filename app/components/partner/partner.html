@@ -1,0 +1,11 @@
+<!-- Brand Bar -->
+<div class="bg-black w-100 row m-0">
+  <div class="container">
+    <div
+      class="brand-bar d-flex flex-wrap justify-content-center justify-content-md-start align-items-centertext-white py-4 px-2 mx-xl-5">
+      @for (partner of partners; track $index) {
+        <div class="brand-item px-2 cols-12 cols-md mx-auto">{{ partner }}</div>
+      }
+    </div>
+  </div>
+</div>

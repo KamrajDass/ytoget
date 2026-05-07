@@ -1,0 +1,9 @@
+<h1 class="text-center fw-bolder mt-5 mb-4">TOP SELLING</h1>
+<div class="container border-bottom pb-5 px-2">
+<div class="box-card mt-3">
+  @for (pro of products; track $index) {
+    <app-card [product]="pro"></app-card>
+  }
+</div>
+  <button class="btn mx-auto d-block mt-5 fw-bolder">View All</button>
+</div>

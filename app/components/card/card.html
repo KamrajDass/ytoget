@@ -1,0 +1,45 @@
+<div class="product-card">
+    <div class="img-box">
+        <img src="{{product.imageUrl}}" alt="{{product.name}}">
+        <div class="side-icons">
+            <a href="#" class="action-btn" title="Add to Wishlist"><i class="far fa-heart"></i></a>
+            <a [routerLink]="['/info', product._id]" class="action-btn" title="Quick View"><i
+                    class="fas fa-eye"></i></a>
+        </div>
+        <button class="add-to-cart-btn" (click)="addToCart(product)">
+            <i class="fas fa-shopping-basket"></i> Add to Cart
+        </button>
+    </div>
+
+    <div class="details">
+        <span class="category">Electronics</span>
+        <h3 class="title">{{product.name}}</h3>
+        <div class="stars">⭐⭐⭐⭐☆ <span class="review-count">(24)</span></div>
+        <div class="price-tag">
+            <span class="current">${{product.price}}</span>
+            <span class="old">$250</span>
+        </div>
+    </div>
+</div>
+
+@if (showToast) {
+<div class="responsive-toast-container">
+    <div class="solid-orange-box">
+        <div class="toast-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+
+        <div class="toast-text">
+            <strong>Success</strong>
+            <span>{{product.name}} added to cart</span>
+        </div>
+
+        <button class="toast-close-btn" (click)="closeToast()">&times;</button>
+
+        <div class="toast-timer"></div>
+    </div>
+</div>
+}

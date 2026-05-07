@@ -1,0 +1,60 @@
+<div class="login-page">
+    <div class="compact-card">
+
+        <div class="image-box">
+            <div class="overlay">
+                <h2 class="brand-name">SHOP<span>.CO</span></h2>
+            </div>
+        </div>
+
+        <div class="form-box">
+            <div class="header">
+                <h3>Welcome Back</h3>
+                <p>Login to your store account</p>
+            </div>
+
+            <form class="mini-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+                <div class="input-item">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" formControlName="email" placeholder="Email Address">
+                </div>
+
+                <div class="input-item password-container">
+                    <i class="bi bi-shield-lock"></i>
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password"
+                        placeholder="Password">
+
+                    <span class="toggle-eye" (click)="togglePasswordVisibility()">
+                        <i class="bi" [ngClass]="isPasswordVisible ? 'bi-eye' : 'bi-eye-slash'"></i>
+                    </span>
+                </div>
+
+                <div class="form-options">
+                    <label><input type="checkbox"> Remember</label>
+                    <a routerLink="/forgot-password" class="forgot">Forgot?</a>
+                </div>
+
+                @if (errorMessage) {
+                <div class="error-alert">
+                    <i class="bi bi-exclamation-circle-fill"></i> {{ errorMessage }}
+                </div>
+                }
+                <button type="submit" class="btn submit-btn" [disabled]="loginForm.invalid">
+                    Login
+                </button>
+                <div class="social-divider">
+                    <span>OR</span>
+                </div>
+
+                <div class="social-icons-mini">
+                    <button type="button" class="s-btn"><i class="bi bi-google"></i></button>
+                    <button type="button" class="s-btn"><i class="bi bi-apple"></i></button>
+                </div>
+
+                <p class="switch">New here? <a routerLink="/user/signUp">Create Account</a></p>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,45 @@
+.box-card{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.btn {
+    width: 218px;
+    height: 52px;
+    border-radius: 30px;
+    color: black;
+    background: linear-gradient(to right, black 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    border: 1px solid #000;
+    transition: all 0.5s ease;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect */
+.btn:hover {
+    color: white;
+    background-position: left bottom; /* left → right sliding */
+}
+
+/* desktop 4 cards */
+app-card{
+  width: calc(25% - 20px);
+}
+
+/* tablet 3 cards */
+@media (max-width:992px){
+  app-card{
+    width: calc(50% - 20px);
+  }
+}
+
+/* mobile 2 cards */
+@media (max-width:576px){
+  app-card{
+    width: calc(50% - 10px);
+  }
+}

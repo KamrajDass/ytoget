@@ -1,0 +1,112 @@
+<div class="inventory-wrapper py-4">
+    <div class="container-fluid">
+        <div class="row mb-4 align-items-center">
+            <div class="header-text">
+                <h2 class="mb-0 fw-bold text-center mb-4">Inventory Manager</h2>
+            </div>
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="input-group search-box shadow-sm rounded-pill overflow-hidden border">
+                    <span class="input-group-text border-0 bg-white ps-3"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control border-0 py-2 shadow-none"
+                        placeholder="Search product or description..." [(ngModel)]="searchTerm"
+                        (input)="searchProducts()">
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <button class="btn btn-primary rounded-pill px-4" (click)="loadProducts()">
+                    <i class="bi bi-arrow-clockwise"></i> Refresh
+                </button>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (p of pagedProducts; track p._id) {
+                        <tr>
+                            <td data-label="Product">
+                                <div class="product-cell-wrapper">
+                                    <img [src]="p.imageUrl" class="product-img shadow-sm">
+                                    <div class="product-details overflow-hidden">
+                                        @if (editingId !== p._id) {
+                                        <span class="fw-bold d-block text-truncate">{{p.name}}</span>
+                                        <small class="text-muted text-truncate d-block">{{p.slug}}</small>
+                                        } @else {
+                                        <input [(ngModel)]="tempData.name"
+                                            class="form-control form-control-sm border-primary">
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Category">
+                                @if (editingId !== p._id) {
+                                <span class="badge-custom">{{p.category}}</span>
+                                } @else {
+                                <input [(ngModel)]="tempData.category"
+                                            class="form-control form-control-sm border-primary">
+                                }
+                            </td>
+                            <td data-label="Price" class="fw-bold text-dark">${{p.price}}</td>
+                            <td data-label="Stock" [class.text-danger]="p.stock < 10">{{p.stock}}</td>
+                            <td data-label="Status">
+                                <span class="status-dot" [class.bg-success]="p.isActive"
+                                    [class.bg-secondary]="!p.isActive"></span>
+                                <small>{{p.isActive ? 'Active' : 'Draft'}}</small>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="action-wrapper">
+                                    @if (editingId !== p._id) {
+                                    <button class="btn btn-light btn-sm text-primary" (click)="startEdit(p)"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-light btn-sm text-danger" (click)="deleteProduct(p._id)"><i
+                                            class="bi bi-trash"></i></button>
+                                    } @else {
+                                    <button class="btn btn-success btn-sm me-1" (click)="saveEdit()"><i
+                                            class="bi bi-check-lg"></i></button>
+                                    <button class="btn btn-secondary btn-sm" (click)="cancelEdit()"><i
+                                            class="bi bi-x-lg"></i></button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer bg-white py-3 border-top-0 d-flex justify-content-between align-items-center">
+                <small class="text-muted">Page {{currentPage}} of {{totalPages}}</small>
+                <nav>
+                    <ul class="pagination pagination-sm mb-0 gap-1">
+                        <li class="page-item" [class.disabled]="currentPage === 1">
+                            <button class="page-link border-0 rounded-3 shadow-sm"
+                                (click)="setPage(currentPage - 1)">Previous</button>
+                        </li>
+
+                        @for (n of pageNumbers; track n) {
+                        <li class="page-item" [class.active]="currentPage === n">
+                            <button class="page-link border-0 rounded-3 shadow-sm" (click)="setPage(n)">{{n}}</button>
+                        </li>
+                        }
+
+                        <li class="page-item" [class.disabled]="currentPage === totalPages">
+                            <button class="page-link border-0 rounded-3 shadow-sm"
+                                (click)="setPage(currentPage + 1)">Next</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

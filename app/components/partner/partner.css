@@ -1,0 +1,25 @@
+.brand-bar {
+  font-weight: bold;
+  font-size: 1rem;           /* Adjust as needed */
+  white-space: nowrap;        /* Prevents text wrapping unnecessarily */
+}
+
+.brand-item {
+  color: #fff;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 42px;
+  font-family: Integral CF;
+}
+
+/* Responsive tweaks for mobile */
+@media (max-width: 576px) {
+  .brand-item {
+  color: #fff;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 32px;
+  font-family: Integral CF;
+}
+
+}

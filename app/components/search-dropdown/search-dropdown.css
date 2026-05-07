@@ -1,0 +1,60 @@
+Hover effect for trending tags
+.hover-bg:hover {
+    background-color: #e0e0e0 !important;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Custom search bar styling */
+.custom-search-group {
+    width: 520px;
+    /* Default desktop */
+    height: 48px;
+    border-radius: 25px !important;
+    /* Force rounded */
+    overflow: hidden;
+    background-color: #F2F0F1 !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Input reset */
+.custom-search-group input {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 100%;
+}
+
+.custom-search-group .input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    padding-left: 20px;
+    color: #666;
+}
+
+/* Modal specific tweaks */
+.modal-content {
+    background-color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .custom-search-group {
+        width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .custom-search-group {
+        width: 100%;
+    }
+
+    /* Modal inside mobile full width */
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 22px;
+    }
+}

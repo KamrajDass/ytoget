@@ -1,0 +1,264 @@
+.login-page {
+    min-height: 87vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.compact-card {
+    display: flex;
+    width: 750px;
+    /* Same compact size as Signup */
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Left Image Box (Same Style) */
+.image-box {
+    flex: 0.8;
+    background: url('https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=600') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: 450px;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand {
+    color: white;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    border: 2px solid white;
+    padding: 5px 15px;
+}
+
+/* Right Form Box */
+.form-box {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header h3 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #2d3436;
+}
+
+.header p {
+    font-size: 0.85rem;
+    color: #a4b0be;
+    margin-bottom: 25px;
+}
+
+.input-item {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.input-item i {
+    color: #636e72;
+    margin-right: 12px;
+    font-size: 0.9rem;
+}
+
+.input-item input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+/* Options (Forgot/Remember) */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    color: #636e72;
+}
+
+.forgot {
+    text-decoration: none;
+    color: #ff4757;
+    font-weight: 600;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #2d3436;
+    /* Dark theme for Login */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #000;
+    transform: translateY(-1px);
+}
+
+/* Social Section */
+.social-divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    font-size: 10px;
+    color: #ced4da;
+}
+
+.social-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #eee;
+    z-index: 1;
+}
+
+.social-divider span {
+    background: white;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.social-icons-mini {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.s-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: white;
+    cursor: pointer;
+}
+
+.switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #636e72;
+}
+
+.switch a {
+    color: #ff4757;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.brand-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #dfe4ea;
+}
+
+.brand-name span {
+    color: #ff4757;
+}
+
+.password-container {
+    position: relative;
+    /* Eye icon ko position dene ke liye */
+}
+
+.password-container input {
+    padding-right: 40px !important;
+    /* Eye icon ke liye jagah */
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    color: #a4b0be;
+    transition: 0.3s;
+}
+
+.toggle-eye:hover {
+    color: #2d3436;
+    /* Hover par dark ho jayega */
+}
+
+.error-alert {
+    background-color: #fce4e4;
+    border: 1px solid #fcc2c2;
+    color: #cc0033;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: shake 0.2s ease-in-out 0s 2;
+    /* Thoda shake effect */
+}
+
+/* Optional: Shake animation jab error aaye */
+@keyframes shake {
+    0% {
+        margin-left: 0rem;
+    }
+
+    25% {
+        margin-left: 0.5rem;
+    }
+
+    75% {
+        margin-left: -0.5rem;
+    }
+
+    100% {
+        margin-left: 0rem;
+    }
+}
+
+/* Responsive Logic */
+@media (max-width: 650px) {
+    .image-box {
+        display: none;
+    }
+
+    .compact-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .form-box {
+        padding: 30px;
+    }
+}

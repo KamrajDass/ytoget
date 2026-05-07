@@ -1,0 +1,325 @@
+:host {
+    display: block;
+    /* Color Palette from Image */
+    --card-bg: #e6ddd3;
+    /* Background from image */
+    --text-dark: #1a1310;
+    /* Dark brown text */
+    --text-muted: #8b7e74;
+    /* Light brown text */
+    --btn-delete: #d8c8bf;
+    /* Delete button beige */
+    --select-bg: #e0d5c9;
+    /* Role select background */
+    --white: #ffffff;
+}
+
+/* Main Container */
+.users-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    font-family: 'Inter', sans-serif;
+    /* Modern font */
+}
+
+/* Header Area Styling */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+h3 {
+    margin: 8px 0;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.subtext {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 600px;
+}
+
+/* Buttons Styling */
+.btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Refresh Button (Top Right) */
+.btn-refresh {
+    background: white;
+    border: 1px solid var(--text-dark);
+    color: var(--text-dark);
+}
+
+.btn-refresh:hover {
+    background: #f5f5f5;
+}
+
+/* Delete Button */
+.btn-delete {
+    background: var(--btn-delete);
+    color: #4a342f;
+    border: 1px solid #d1bbaa;
+}
+
+.btn-delete:hover {
+    background: #cfb9ae;
+}
+
+/* Table Container (Advance handling) */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Desktop/Tablet Table (Base Styles) */
+.account-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+    /* Forces horizontal scroll on too-small screens */
+}
+
+.account-table th {
+    text-align: left;
+    padding: 16px;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #ddd1c2;
+}
+
+.account-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #f0e6da;
+    vertical-align: middle;
+}
+
+/* Account specific blocks */
+.name-id-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.user-id {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.user-email,
+.verified-text,
+.created-date {
+    color: #4a342f;
+    font-weight: 500;
+}
+
+/* Advance Role Select styling */
+.role-select-wrapper {
+    position: relative;
+    max-width: 140px;
+}
+
+/* Adding custom arrow for Advanced look */
+.role-select-wrapper::after {
+    content: '▼';
+    font-size: 10px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #5d4037;
+}
+
+.role-select-wrapper select {
+    width: 100%;
+    padding: 10px 30px 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #c9b4a1;
+    background: var(--select-bg);
+    color: #1a1310;
+    appearance: none;
+    /* Hide default browser arrow */
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+/* Desktop Action Column Styling */
+.account-table td:last-child {
+    text-align: center;
+}
+
+.btn-delete {
+    background: #fdf2f2; /* Light reddish tint */
+    color: #a83232;      /* Darker red for text */
+    border: 1px solid #f5c6c6;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: #a83232;
+    color: white;
+    box-shadow: 0 4px 12px rgba(168, 50, 50, 0.2);
+}
+/* =========================================
+   RESPONSIVE FIX (Starts from 1000px)
+   ========================================= */
+@media (max-width: 1000px) {
+    .users-card {
+        padding: 20px;
+        border-radius: 16px;
+        margin: 10px; /* Thora gap edges se */
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .btn-refresh {
+        width: 100%;
+        max-width: 160px; /* Thora chota button */
+        border-radius: 8px;
+    }
+
+    /* Table Container reset */
+    .table-container {
+        overflow-x: hidden;
+    }
+
+    /* Table to Cards Conversion */
+    .account-table, 
+    .account-table tbody, 
+    .account-table tr, 
+    .account-table td {
+        display: block;
+        width: 100% !important;
+        box-sizing: border-box;
+        min-width: unset !important;
+    }
+
+    .account-table thead {
+        display: none; /* Hide Desktop Headers */
+    }
+
+    .account-table tr {
+        background: var(--white);
+        margin-bottom: 20px;
+        padding: 0; /* Padding hum cells mein manage karenge */
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #dcd1c5;
+        overflow: hidden; /* Taake footer rounded rahe */
+    }
+
+    .account-table td {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        padding: 12px 15px;
+        border-bottom: 1px solid #f0e9e2;
+        align-items: center;
+    }
+
+    /* Column Labels */
+    .account-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    /* Action Section (Footer Style) */
+    .account-table td[data-label="Actions"] {
+        display: block; /* Grid khatam */
+        background: #f8f3ef; /* Slightly darker footer */
+        border-bottom: none;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .account-table td[data-label="Actions"]::before {
+        display: none; /* "Actions" label hide */
+    }
+
+    /* Role Select on Mobile */
+    .role-select-wrapper {
+        max-width: 100%;
+    }
+
+    /* Action Button (Premium Look) */
+    .btn-delete {
+        width: 100%;
+        max-width: 280px; /* Mobile par width control */
+        margin: 0 auto;
+        padding: 12px;
+        border-radius: 8px;
+        background: #fdf2f2;
+        color: #a83232;
+        border: 1px solid #f5c6c6;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        display: inline-block;
+    }
+
+    .btn-delete:active {
+        background: #a83232;
+        color: white;
+    }
+
+    /* Email Wrap Fix */
+    .user-email {
+        word-break: break-word;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens fix (iPhone SE etc) */
+@media (max-width: 400px) {
+    .account-table td {
+        grid-template-columns: 1fr; /* Stack labels on top of value */
+        gap: 4px;
+    }
+    
+    .account-table td::before {
+        font-size: 0.65rem;
+    }
+}

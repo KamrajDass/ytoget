@@ -1,0 +1,100 @@
+<section class="video-download-page">
+  <div class="download-card">
+    <h2 class="title">YouTube Video Downloader</h2>
+    <p class="subtitle">Paste a YouTube URL, submit, and your video download will start.</p>
+
+    <form (ngSubmit)="submit()" #downloadForm="ngForm" class="download-form">
+      <label for="videoUrl">YouTube URL</label>
+      <input
+        id="videoUrl"
+        name="videoUrl"
+        type="url"
+        [(ngModel)]="videoUrl"
+        required
+        placeholder="https://www.youtube.com/watch?v=..."
+      />
+
+      <label for="fileName">File name (optional)</label>
+      <input
+        id="fileName"
+        name="fileName"
+        type="text"
+        [(ngModel)]="fileName"
+        placeholder="youtube-video"
+      />
+
+      <div class="format-section">
+        <span class="format-label">Format</span>
+        <div class="format-group">
+          <span class="format-group-label">Video (MP4)</span>
+          <div class="format-chips">
+            @for (opt of formatOptions; track opt.key) {
+              @if (opt.group === 'video') {
+                <button
+                  type="button"
+                  class="format-chip"
+                  [class.active]="selectedFormat === opt.key"
+                  (click)="selectedFormat = opt.key"
+                >
+                  {{ opt.icon }} {{ opt.label }}
+                </button>
+              }
+            }
+          </div>
+        </div>
+        <div class="format-group">
+          <span class="format-group-label">Audio</span>
+          <div class="format-chips">
+            @for (opt of formatOptions; track opt.key) {
+              @if (opt.group === 'audio') {
+                <button
+                  type="button"
+                  class="format-chip"
+                  [class.active]="selectedFormat === opt.key"
+                  (click)="selectedFormat = opt.key"
+                >
+                  {{ opt.icon }} {{ opt.label }}
+                </button>
+              }
+            }
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="isDownloading || !downloadForm.form.valid">
+        {{ isDownloading ? 'Downloading...' : 'Download' }}
+      </button>
+    </form>
+
+    @if (isDownloading) {
+      <div class="progress-wrap">
+        @if (progressPercent !== null) {
+          <!-- Determinate -->
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" [style.width.%]="progressPercent"></div>
+          </div>
+          <div class="progress-info">
+            <span>{{ downloadedMB }} MB / {{ totalMB }} MB</span>
+            <span class="progress-pct">{{ progressPercent }}%</span>
+          </div>
+        } @else {
+          <!-- Indeterminate (streaming without Content-Length) -->
+          <div class="progress-bar-track">
+            <div class="progress-bar-indeterminate"></div>
+          </div>
+          <div class="progress-info">
+            <span>Downloading... {{ downloadedMB }} MB received</span>
+          </div>
+        }
+      </div>
+    }
+
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+  </div>
+</section>

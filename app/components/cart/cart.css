@@ -1,0 +1,514 @@
+/* --- Base Container --- */
+.cart-container {
+    padding: 15px;
+    max-width: 100%;
+    font-family: 'Satoshi', sans-serif;
+}
+
+.cart-title {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+/* --- Layout --- */
+.cart-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.items-wrap,
+.summary-wrap {
+    border: 1px solid #E6E6E6;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+/* --- Cart Item Row --- */
+.cart-item {
+    display: flex;
+    gap: 15px;
+}
+
+.item-img {
+    width: 110px;
+    height: 110px;
+    background: #F0EEED;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.details-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-top h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.item-details p {
+    margin: 2px 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.item-details p span {
+    color: #000;
+}
+
+.details-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* --- Qty Control --- */
+.qty-control {
+    background: #F0F0F0;
+    border-radius: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.qty-control button {
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* --- Summary Row Styling --- */
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.text-danger {
+    color: #FF3333;
+}
+
+/* --- Promo Box --- */
+.promo-box {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.input-field {
+    background: #F0F0F0;
+    border-radius: 25px;
+    padding: 8px 15px;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-field input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+}
+
+.apply-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 25px;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Buttons --- */
+.checkout-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border-radius: 25px;
+    padding: 14px;
+    border: none;
+    margin-top: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.divider {
+    border: 1px solid #cacaca;
+    margin: 15px 0;
+}
+
+.delete-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* --- Color Info --- */
+.item-color-info p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #e6e6e6;
+    vertical-align: middle;
+}
+
+/* --- CHECKOUT MODAL FIXED CSS --- */
+
+.checkout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.checkout-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.checkout-modal-card {
+    background: white;
+    width: 95%;
+    max-width: 850px;
+    border-radius: 24px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: 0.3s ease;
+}
+
+.checkout-overlay.active .checkout-modal-card {
+    transform: translateY(0);
+}
+
+.modal-grid-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+}
+
+.billing-form-area {
+    padding: 30px;
+}
+
+.modal-summary-area {
+    background: #F9F9F9;
+    padding: 30px;
+    border-left: 1px solid #EEEEEE;
+}
+
+.modal-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.modal-form-group {
+    margin-bottom: 18px;
+}
+
+.modal-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.modal-form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #EEEEEE;
+    border-radius: 12px;
+    background: #FAFAFA;
+    outline: none;
+}
+
+.payment-cards-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pay-card-item {
+    flex: 1;
+    cursor: pointer;
+}
+
+.pay-card-item input {
+    display: none;
+}
+
+.pay-card-ui {
+    padding: 12px;
+    border: 2px solid #F0F0F0;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.pay-card-item input:checked+.pay-card-ui {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.btn-finalize-order {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    background: #F0F0F0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* --- MEDIA QUERIES --- */
+.delete-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-left: 5px solid #dc3545;
+    /* Red Danger Color */
+    padding: 16px;
+    border-radius: 8px;
+    min-width: 300px;
+    z-index: 9999;
+    transform: translateX(120%);
+    /* Start hidden from right */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.delete-toast.show {
+    transform: translateX(0);
+    /* Show toast */
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-box {
+    background: #fff5f5;
+    color: #dc3545;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.message-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: 700;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.btn-close-toast {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    margin-left: auto;
+    transition: 0.2s;
+}
+
+.btn-close-toast:hover {
+    color: #333;
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #eee;
+}
+
+.progress-bar::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #dc3545;
+    animation: progress 3s linear forwards;
+    /* 3 second tak chalegi */
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+@media (min-width: 768px) {
+    .cart-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .items-wrap {
+        flex: 1.5;
+    }
+
+    .summary-wrap {
+        flex: 1;
+        position: sticky;
+        top: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Cart Item mobile par chhota dikhe aur gaps kam ho jayein */
+    .cart-item {
+        gap: 10px;
+        /* Space kam kar di */
+        padding-bottom: 10px;
+    }
+
+    .item-img {
+        width: 80px;
+        /* Mobile par image ka size thoda chhota kar diya */
+        height: 80px;
+    }
+
+    .details-top h3 {
+        font-size: 14px;
+        /* Product name thoda chhota */
+    }
+
+    .item-details p {
+        font-size: 12px;
+        /* Text size adjust kiya */
+    }
+
+    .price {
+        font-size: 16px;
+        /* Price ka size set kiya */
+    }
+
+    .qty-control {
+        gap: 8px;
+        padding: 4px 10px;
+        /* Control box chhota kiya */
+    }
+
+    .qty-control button {
+        font-size: 16px;
+    }
+
+    /* Baki Modal ki settings jo pehle thi */
+    .modal-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-summary-area {
+        order: -1;
+        border-left: none;
+        border-bottom: 1px solid #EEEEEE;
+        padding: 20px;
+    }
+
+    .billing-form-area {
+        padding: 20px;
+    }
+
+    .checkout-modal-card {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        align-self: flex-end;
+    }
+}

@@ -1,0 +1,396 @@
+/* --- 1. CORE NAVBAR (Mobile & Desktop) --- */
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-brand {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin: 0;
+    color: #000 !important;
+}
+
+/* --- 2. ACTIONS GROUP (Icons & Search) --- */
+.navbar-actions-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 20px);
+    margin-left: auto;
+}
+
+.icon-link,
+.mobile-icon-btn {
+    font-size: 22px;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 6px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.icon-link:active {
+    transform: scale(0.9);
+}
+
+/* Desktop Search Bar */
+.search-bar-wrapper {
+    background-color: #F2F0F1;
+    border-radius: 50px;
+    height: 44px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.search-icon-dim {
+    color: #909090;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.search-input-field {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+}
+
+/* --- 3. PROFILE & DROPDOWN --- */
+.profile-dropdown-wrapper {
+    position: relative;
+}
+
+.profile-capsule-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* --- OFF-CANVAS SIDEBAR CORE --- */
+.offcanvas-custom {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* Hidden by default */
+    width: 300px;
+    max-width: 85vw;
+    /* Mobile screens ke liye overflow prevention */
+    height: 100%;
+    background: #ffffff;
+    z-index: 7000;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s ease;
+    box-shadow: 15px 0 30px rgba(0, 0, 0, 0.08);
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    /* Content niche tak align karne ke liye */
+}
+
+/* Open State */
+.offcanvas-custom.open {
+    left: 0;
+    visibility: visible;
+}
+
+/* Sidebar Links */
+.offcanvas-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+    padding: 12px 0;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.offcanvas-link:active,
+.offcanvas-link:hover {
+    padding-left: 10px;
+    color: #666;
+    background-color: #fafafa;
+}
+
+/* Logout Section at Bottom */
+.btn-logout-mobile {
+    background-color: #fff5f5;
+    color: #dc3545;
+    border: 1px solid #ffebeb;
+    border-radius: 12px;
+    padding: 14px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.btn-logout-mobile:active {
+    transform: scale(0.96);
+    background-color: #f8d7da;
+}
+
+/* Background Overlay (Dim Effect) */
+.offcanvas-overlay-fixed {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    /* Premium Glass Look */
+    z-index: 6999;
+}
+
+/* Custom Close Button in Sidebar */
+.offcanvas-custom .btn-close {
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    opacity: 1;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.avatar-box {
+    background-color: #000;
+    /* Aapka purana color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Modal Search Input Wrapper */
+.modal-search-wrapper {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    border-radius: 12px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.modal-search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 0 15px;
+    font-size: 16px;
+    /* Mobile par zoom prevent karne ke liye 16px best hai */
+}
+
+/* Scrollable Results Area */
+.results-container {
+    overflow-y: auto;
+}
+
+/* Custom Scrollbar for Results */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
+}
+
+/* Backdrop Dimming */
+.modal-backdrop-custom {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 6001;
+    backdrop-filter: blur(2px);
+}
+
+@media (min-width: 992px) {
+    .profile-capsule-btn {
+        padding: 4px 12px 4px 4px;
+        background: #fff;
+        border: 1px solid #eee;
+    }
+}
+
+.avatar-box {
+    width: 32px;
+    height: 32px;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.user-name-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Dropdown Menu Card */
+.profile-menu-card {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #fff;
+    width: 200px;
+    border-radius: 12px;
+    padding: 8px;
+    display: none;
+    z-index: 5000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #f0f0f0;
+}
+
+.profile-dropdown-wrapper.active .profile-menu-card {
+    display: block;
+    animation: slideUp 0.3s ease;
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    gap: 10px;
+    width: 100%;
+    border: none;
+    background: transparent;
+}
+
+.profile-menu-item:hover {
+    background: #f8f9fa;
+}
+
+.logout-red {
+    color: #dc3545 !important;
+}
+
+/* --- 4. SEARCH MODAL & RESULTS --- */
+.search-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 6000;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.search-modal-content {
+    background: white;
+    width: 95%;
+    max-width: 600px;
+    border-radius: 20px;
+    z-index: 6002;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.result-item-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.result-item-row:hover {
+    background: #f9f9f9;
+}
+
+.result-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* --- 5. OFF-CANVAS --- */
+.offcanvas-custom {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    z-index: 7000;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+}
+
+.offcanvas-custom.open {
+    left: 0;
+    visibility: visible;
+}
+
+/* --- UTILITIES --- */
+.cart-badge {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    background: #ff3333;
+    color: #fff;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 576px) {
+    .search-modal-content {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        border-radius: 0;
+        padding-top: env(safe-area-inset-top);
+        /* iPhone notch compatibility */
+    }
+
+    .search-modal-overlay {
+        padding-top: 0;
+    }
+}

@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="product-main">
+        <div class="gallery-section">
+            <div class="thumbs">
+                @for (img of product.gallery; track $index) {
+                <div class="thumb-card" [class.active]="product.imageUrl === img" (click)="product.imageUrl = img">
+                    <img [src]="img" alt="thumb">
+                </div>
+                }
+            </div>
+            <div class="main-img-container">
+                <img [src]="product.imageUrl" class="main-img">
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h1>{{ product.name }}</h1>
+            <div class="rating">
+                <span class="stars">★★★★<span class="half">★</span></span>
+                <span class="score">4.5/5</span>
+            </div>
+            <div class="price-row">
+                <span class="current-price">${{ product.price }}</span>
+                <span class="old-price">${{ product.oldPrice }}</span>
+                <span class="discount-tag">-{{ product.discount }}%</span>
+            </div>
+            <p class="description">{{ product.description }}</p>
+
+            <hr>
+
+            <div class="selection">
+                <p class="label">Select Colors</p>
+                <div class="color-list">
+                    @for (c of product.colors; track $index) {
+                    <button class="color-btn" [style.background]="c" (click)="selectedColor = c">
+                        @if (selectedColor === c) { <span class="tick">✓</span> }
+                    </button>
+                    }
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="selection">
+                <p class="label">Choose Size</p>
+                <div class="size-list">
+                    @for (s of product.sizes; track $index) {
+                    <button class="size-btn" [class.active]="selectedSize === s" (click)="selectedSize = s">
+                        {{ s }}
+                    </button>
+                    }
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="cart-row">
+                <div class="qty-btn">
+                    <button (click)="updateQuantity(-1)" [disabled]="quantity <= 1">−</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="updateQuantity(1)">+</button>
+                </div>
+
+                <button (click)="addToCart(product)" class="add-to-cart" [disabled]="!selectedSize" [style.opacity]="!selectedSize ? '0.5' : '1'"
+                    [style.cursor]="!selectedSize ? 'not-allowed' : 'pointer'">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button>Product Details</button>
+        <button class="active-tab">Rating & Reviews</button>
+        <button>FAQs</button>
+    </div>
+
+    <div class="reviews-header">
+        <h2>All Reviews <span>({{ 0 }})</span></h2>
+        <div class="review-actions">
+            <button class="filter-icon">⚙️</button>
+            <button class="sort-btn">Latest <span>⌵</span></button>
+            <button class="write-btn">Write a Review</button>
+        </div>
+    </div>
+
+    <div class="reviews-grid">
+        @for (r of reviews; track $index) {
+        <div class="review-card">
+            <div class="stars">
+                @for (star of [1,2,3,4,5]; track $index) {
+                <span [style.color]="star <= r.rating ? '#FFC633' : '#E6E6E6'">★</span>
+                }
+            </div>
+
+            <h3>{{ r.userName }}
+                @if (r.isVerified) { <span class="verified">✅</span> }
+            </h3>
+
+            <p>"{{ r.comment }}"</p>
+
+            <p class="posted-date">Posted on {{ r.date +'longDate' }}</p>
+        </div>
+        } @empty {
+        <p>No reviews yet for this product.</p>
+        }
+    </div>
+
+    <button class="load-more">Load More Reviews</button>
+</div>
+
+
+
+<h1 class="text-center fw-bolder mb-4">YOU MIGHT ALSO LIKE</h1>
+<div class="container border-bottom pb-5 px-2">
+    <div class="box-card mt-3">
+        @for (pro of products; track $index) {
+        <app-card [product]="pro"></app-card>
+        }
+    </div>
+    <button class="btn mx-auto d-block mt-5 fw-bolder">View All</button>
+</div>
+
+<app-footer></app-footer>
