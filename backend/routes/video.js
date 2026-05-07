@@ -19,6 +19,25 @@ const downloadJobs = new Map();
 
 const DOWNLOAD_JOB_TTL_MS = 15 * 60 * 1000;
 const DOWNLOAD_PROGRESS_RE = /\[download\]\s+(\d+(?:\.\d+)?)%/i;
+const YTDLP_COOKIE_FILE = String(process.env.YTDLP_COOKIE_FILE || '').trim();
+const YTDLP_PLAYER_CLIENTS = String(process.env.YTDLP_PLAYER_CLIENTS || 'android,web').trim();
+
+const withYtDlpRuntimeArgs = (args, { includeNoPlaylist = true } = {}) => {
+  const finalArgs = Array.isArray(args) ? [...args] : [];
+
+  if (includeNoPlaylist && !finalArgs.includes('--no-playlist')) {
+    finalArgs.push('--no-playlist');
+  }
+
+  finalArgs.push('--extractor-args', `youtube:player_client=${YTDLP_PLAYER_CLIENTS}`);
+  finalArgs.push('--js-runtimes', 'node');
+
+  if (YTDLP_COOKIE_FILE) {
+    finalArgs.push('--cookies', YTDLP_COOKIE_FILE);
+  }
+
+  return finalArgs;
+};
 
 async function getYtDlp() {
   if (ytDlp) return ytDlp;
@@ -284,7 +303,9 @@ const readProcessOutput = (stream, job) => {
 
 const getRequestedFormatSize = (rawUrl, formatExpression) => {
   return getYtDlp().then((wrapper) =>
-    wrapper.execPromise([rawUrl, '--print', 'filesize_approx', '--no-playlist', '-f', formatExpression])
+    wrapper.execPromise(
+      withYtDlpRuntimeArgs([rawUrl, '--print', 'filesize_approx', '--no-playlist', '-f', formatExpression])
+    )
   ).then((value) => {
     const parsed = Number.parseInt(String(value || '').trim(), 10);
     return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
@@ -298,7 +319,9 @@ const resolveDownloadTitle = async (rawUrl, requestedName) => {
 
   try {
     const wrapper = await getYtDlp();
-    const titleResult = await wrapper.execPromise([rawUrl, '--print', 'title', '--no-playlist']);
+    const titleResult = await wrapper.execPromise(
+      withYtDlpRuntimeArgs([rawUrl, '--print', 'title', '--no-playlist'])
+    );
     const clean = sanitizeFileName(String(titleResult || '').trim());
     return clean || 'youtube-video';
   } catch {
@@ -362,7 +385,7 @@ const createDownloadJob = async ({ rawUrl, requestedName, formatKey }) => {
   downloadJobs.set(job.id, job);
   scheduleJobCleanup(job.id);
 
-  const child = spawn(BIN_PATH, ytdlpArgs, {
+  const child = spawn(BIN_PATH, withYtDlpRuntimeArgs(ytdlpArgs), {
     stdio: ['ignore', 'pipe', 'pipe']
   });
 
@@ -555,7 +578,9 @@ router.get('/info', async (req, res) => {
 
   try {
     const wrapper = await getYtDlp();
-    const rawInfo = await wrapper.execPromise([cleanUrl, '--dump-single-json', '--no-playlist']);
+    const rawInfo = await wrapper.execPromise(
+      withYtDlpRuntimeArgs([cleanUrl, '--dump-single-json', '--no-playlist'])
+    );
     const info = parseInfoJson(rawInfo);
 
     const title = sanitizeFileName(info.title || 'youtube-video') || 'youtube-video';
@@ -704,7 +729,7 @@ router.get('/download', async (req, res) => {
     const wrapper = await getYtDlp();
 
     const [titleResult] = await Promise.allSettled([
-      wrapper.execPromise([cleanUrl, '--print', 'title', '--no-playlist'])
+      wrapper.execPromise(withYtDlpRuntimeArgs([cleanUrl, '--print', 'title', '--no-playlist']))
     ]);
 
     let title = requestedName;
@@ -727,7 +752,7 @@ router.get('/download', async (req, res) => {
         '-o', '-'
       ];
 
-      const child = spawn(BIN_PATH, ytdlpArgs, {
+      const child = spawn(BIN_PATH, withYtDlpRuntimeArgs(ytdlpArgs), {
         stdio: ['ignore', 'pipe', 'pipe']
       });
 
@@ -839,7 +864,7 @@ router.get('/download', async (req, res) => {
           '-o', outputTemplate
         ];
 
-    await wrapper.execPromise(ytdlpArgs);
+    await wrapper.execPromise(withYtDlpRuntimeArgs(ytdlpArgs));
 
     const downloadedFile = findDownloadedFile(downloadId, outputExt);
     if (!downloadedFile) {
