@@ -20,7 +20,50 @@ const downloadJobs = new Map();
 const DOWNLOAD_JOB_TTL_MS = 15 * 60 * 1000;
 const DOWNLOAD_PROGRESS_RE = /\[download\]\s+(\d+(?:\.\d+)?)%/i;
 const YTDLP_COOKIE_FILE = String(process.env.YTDLP_COOKIE_FILE || '').trim();
+const YTDLP_COOKIES_B64 = String(process.env.YTDLP_COOKIES_B64 || '').trim();
+const YTDLP_COOKIES_TXT = String(process.env.YTDLP_COOKIES_TXT || '').trim();
 const YTDLP_PLAYER_CLIENTS = String(process.env.YTDLP_PLAYER_CLIENTS || 'android,web').trim();
+
+const YTDLP_COOKIE_TMP_FILE = path.join(os.tmpdir(), 'yt-dlp-cookies.txt');
+
+const resolveYtDlpCookieFile = () => {
+  if (YTDLP_COOKIE_FILE) {
+    return YTDLP_COOKIE_FILE;
+  }
+
+  let cookieText = '';
+
+  if (YTDLP_COOKIES_B64) {
+    try {
+      cookieText = Buffer.from(YTDLP_COOKIES_B64, 'base64').toString('utf8').trim();
+    } catch (error) {
+      console.error('[yt-dlp] invalid YTDLP_COOKIES_B64 value:', error.message);
+    }
+  }
+
+  if (!cookieText && YTDLP_COOKIES_TXT) {
+    cookieText = YTDLP_COOKIES_TXT.trim();
+  }
+
+  if (!cookieText) {
+    return '';
+  }
+
+  try {
+    fs.writeFileSync(YTDLP_COOKIE_TMP_FILE, cookieText, { encoding: 'utf8', mode: 0o600 });
+    return YTDLP_COOKIE_TMP_FILE;
+  } catch (error) {
+    console.error('[yt-dlp] failed to write cookies file:', error.message);
+    return '';
+  }
+};
+
+const EFFECTIVE_YTDLP_COOKIE_FILE = resolveYtDlpCookieFile();
+
+const isYoutubeBotCheckError = (value) => {
+  const text = String(value || '').toLowerCase();
+  return text.includes('sign in to confirm you') || text.includes('not a bot');
+};
 
 const withYtDlpRuntimeArgs = (args, { includeNoPlaylist = true } = {}) => {
   const finalArgs = Array.isArray(args) ? [...args] : [];
@@ -32,8 +75,8 @@ const withYtDlpRuntimeArgs = (args, { includeNoPlaylist = true } = {}) => {
   finalArgs.push('--extractor-args', `youtube:player_client=${YTDLP_PLAYER_CLIENTS}`);
   finalArgs.push('--js-runtimes', 'node');
 
-  if (YTDLP_COOKIE_FILE) {
-    finalArgs.push('--cookies', YTDLP_COOKIE_FILE);
+  if (EFFECTIVE_YTDLP_COOKIE_FILE) {
+    finalArgs.push('--cookies', EFFECTIVE_YTDLP_COOKIE_FILE);
   }
 
   return finalArgs;
@@ -603,6 +646,11 @@ router.get('/info', async (req, res) => {
     const msg = (error instanceof Error ? error.message : String(error || '')) || 'Failed to fetch video info';
     console.error('[yt-dlp] info error:', msg);
     if (!res.headersSent) {
+      if (isYoutubeBotCheckError(msg)) {
+        return res.status(503).json({
+          message: 'YouTube is rate-limiting this server. Add YTDLP_COOKIES_B64 (or YTDLP_COOKIES_TXT) on Render and redeploy.'
+        });
+      }
       return res.status(422).json({ message: msg });
     }
   }
@@ -625,8 +673,14 @@ router.post('/download-jobs', async (req, res) => {
     const job = await createDownloadJob({ rawUrl, requestedName, formatKey });
     return res.status(202).json(publicJobState(job));
   } catch (error) {
-    console.error('[yt-dlp] job create error:', error.message);
-    return res.status(422).json({ message: error.message || 'Failed to start download job' });
+    const msg = error?.message || 'Failed to start download job';
+    console.error('[yt-dlp] job create error:', msg);
+    if (isYoutubeBotCheckError(msg)) {
+      return res.status(503).json({
+        message: 'YouTube is rate-limiting this server. Add YTDLP_COOKIES_B64 (or YTDLP_COOKIES_TXT) on Render and redeploy.'
+      });
+    }
+    return res.status(422).json({ message: msg });
   }
 });
 
