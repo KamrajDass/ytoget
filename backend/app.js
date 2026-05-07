@@ -14,6 +14,7 @@ var app = express();
 const allowedOrigins = [
   'http://localhost:1100',
   process.env.FIREBASE_HOSTING_URL,
+  process.env.FIREBASE_HOSTING_URL_ALT,
 ].filter(Boolean);
 
 app.use(cors({

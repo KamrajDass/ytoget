@@ -9,6 +9,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: FIREBASE_HOSTING_URL
-        # Set this after Firebase deploy, e.g. https://your-project-id.web.app
-        value: https://YOUR-PROJECT-ID.web.app
+        value: https://angular-19-ssr.web.app
+      - key: FIREBASE_HOSTING_URL_ALT
+        value: https://angular-19-ssr.firebaseapp.com
     autoDeploy: true
